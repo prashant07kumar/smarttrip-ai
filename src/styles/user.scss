@@ -1,0 +1,18 @@
+@use "@/styles/variables.scss" as *;
+.user-area {
+  padding: 2rem 0;
+  @media (min-width: $mobile) {
+    padding: 3rem 0;
+  }
+  &__content {
+    .trip-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      
+    }
+  }
+}
+.hide-map {
+  display: none !important;
+}

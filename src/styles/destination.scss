@@ -1,0 +1,456 @@
+@use "@/styles/variables.scss" as *;
+
+// Destination Hero
+.destination-hero {
+  position: relative;
+  height: 70vh;
+  min-height: 400px;
+  overflow: hidden;
+  padding:0;
+  &__image {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, $primary-color 0%, $accent-color 100%);
+    position: relative;
+  }
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.6));
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 3rem;
+  }
+  &__content {
+    color: $white;
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      opacity: 0.9;
+      a {
+        color: $white;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      span {
+        opacity: 0.7;
+      }
+    }    
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      @media (max-width: $mobile) {
+        font-size: 2rem;
+      }
+    }
+    
+    p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      max-width: 600px;
+    }
+  }
+}
+// Quick Info Bar
+.quick-info {
+  background: $white;
+  border-bottom: 1px solid $border-color;
+  padding: 1.5rem 0;
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1rem;
+    
+    @media (min-width: $tablet) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    
+    .icon {
+      font-size: 1.5rem;
+      color:$secondary-color
+    }
+    
+    .content {
+      display: flex;
+      flex-direction: column;
+      
+      .label {
+        font-size: 0.75rem;
+        color: $text-light;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      
+      .value {
+        font-weight: 600;
+        color: $text-dark;
+      }
+    }
+  }
+}
+// Content Grid
+.dashboard-container {
+  padding: 3rem 0;
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    @media (min-width: $tablet) {
+   
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: $mobile) {
+
+
+    .content-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+      &.info-grid__2col{
+      align-items: start;
+      @media (min-width: $mobile) {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  }
+  }
+  /* Card styles */
+  .card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: $radius;
+    padding:0;
+     &:hover {
+      transform: none;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .card-header {
+    padding: 1rem;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, $primary-color 0%, $primary-color-light 100%);
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color:white
+  }
+
+  .card-content {
+    padding: 1.5rem;
+  }
+
+  /* Basic info grid */
+  .info-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .info-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .info-label {
+    font-weight: 600;
+    color: $text-dark;
+    margin-bottom: 0.25rem;
+  }
+
+  .info-value {
+    color: $text-light;
+  }
+
+  /* Weather styles */
+  .weather-main {
+    text-align: center;
+    margin-bottom: 1rem;
+    position:relative;
+    
+  }
+
+  .temperature {
+    font-size: 3rem;
+    font-weight: 700;
+    color: $primary-color;
+    margin-bottom: 0.5rem;
+    position:relative;
+    z-index:2
+  }
+
+  .weather-condition {
+    color: $text-light;
+    margin-bottom: 1rem;
+  }
+
+  .weather-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    text-align: center;
+  }
+  .weather-icon-bg{
+    width: 280px;             
+    height: 5rem;            
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left center;
+    position:relative;
+    z-index:1;
+    margin: 0 auto;
+
+  }
+  .weather-item {
+    padding: 0.75rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .weather-item.temp {
+    background-color: $background-light;
+  }
+
+  .weather-item.humidity {
+    background-color: $background-light;
+  }
+
+  .weather-item.wind {
+    background-color: $background-light;
+  }
+
+  .weather-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .weather-icon.temp {
+    color: $orange;
+  }
+
+  .weather-icon.humidity {
+    color: $primary-color;
+  }
+
+  .weather-icon.wind {
+    color: $text-light;
+  }
+
+  .weather-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .weather-value {
+    font-size: 0.875rem;
+  }
+
+  .weather-value.temp {
+    color: $orange-m;
+  }
+
+  .weather-value.humidity {
+    color: $primary-color;
+  }
+
+  .weather-value.wind {
+    color: $text-light;
+  }
+
+  /* Map styles */
+  .map-container {
+    height: 20rem;
+    background-color: $background-light;
+    border-radius: 0 0 12px 12px;
+    overflow: hidden;
+  }
+
+  .map-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Content sections */
+  .content-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+ 
+
+  .content-header {
+    padding: 1.5rem 1.5rem 0;
+  }
+
+  .content-title {
+    font-size: 1.5rem;
+    color: $text-dark;
+    margin: 0;
+  }
+
+  .content-body {
+    padding: 1.5rem;
+  }
+
+  .content-image {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+
+  .content-text {
+    color: $text-light;
+    line-height: 1.7;
+    text-align: justify;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    line-clamp: 3; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.3s ease;
+     &.expanded {
+      -webkit-line-clamp: unset;
+      line-clamp: unset;
+      overflow: visible;
+    }
+  }
+  .read-more-btn {
+    margin-top: 0.5rem;
+    color: $primary-color-light;
+    cursor: pointer;
+    font-size: 0.875rem;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    padding: 0;
+    transition: all 0.3s ease;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    &:hover{
+      color: $primary-color;
+    }
+  }
+
+  /* Chatbot styles */
+  .chatbot-container {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 1250;
+  }
+
+  .chatbot-button {
+    width: 12rem;
+    height: 4rem;
+    border-radius: 50px!important;
+    background: linear-gradient(135deg, $orange 0%, $orange-m 100%);
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .chatbot-button:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+    background: linear-gradient(135deg, $orange-m 0%, $orange-d 100%);
+  }
+
+  .chatbot-icon {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 8px;
+    color: white;
+  }
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .dashboard-container {
+      padding: 0.5rem;
+    }
+    .dashboard-title {
+      font-size: 2rem;
+    }
+    .chatbot-window {
+      width: calc(100vw - 2rem);
+      max-width: 20rem;
+    }
+    .info-details {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .weather-details {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+  }
+
+ 
+}
+
+
+// Info Sections
+.info-section {
+  margin-bottom: 3rem;
+  
+  h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: $text-dark;
+  }
+}
+
+

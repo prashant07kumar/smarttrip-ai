@@ -1,0 +1,126 @@
+@use "@/styles/variables.scss"  as *;
+.user-itineraries{
+    h1{
+        font-size: 1.7rem; 
+        font-weight: 700;    
+        margin-bottom: 1.5rem; 
+        line-height: 2rem;
+        text-align: center;
+        @media (min-width: $mobile) {
+          font-size: 2rem; 
+          font-weight: 700;    
+          margin-bottom: 2.8rem; 
+        }
+    }
+    .itineraries-grid{
+        display: grid;
+        gap: 1rem;
+         grid-template-columns: 1fr;
+         align-items: start;
+        @media (min-width: $mobile) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (min-width: 1024px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .card{
+            background-color: white;
+            border-radius: $radius; 
+            box-shadow: $shadow; 
+            padding:0;
+            min-height:420px;
+            .title{
+                font-size: 1.25rem;   
+                line-height: 1.5rem;    
+                font-weight: 600;        
+                color:$primary-color;           
+                margin-bottom: 0.25rem;
+            }
+            .subtitle{
+                font-size: 0.875rem;     
+                color: $text-light;  
+                margin-bottom: 0.5rem;  
+            }
+            .image-wrapper{
+                 
+                 border-radius: $radius $radius 0 0;
+                 overflow: hidden;
+                 cursor:pointer;
+            }
+            .card-content{
+                padding:1rem;
+                min-height: 230px;
+                display:grid;
+                align-items: start;
+            }
+            .travel-details{
+                margin: 10px 0;
+                color: $text-light; 
+                display:flex;
+                justify-content: center;
+                gap:6px;
+                span{
+                    margin: 0 5px;
+                    display:flex;
+                    flex-direction: column;
+                    align-items: center;
+             
+                }
+            }
+        }
+    }
+}
+
+/* Ocultar botón filtros en desktop y mostrar solo en móvil */
+.filters-button-mobile {
+  display: none;
+  margin-bottom: 1rem;
+}
+
+.filters-desktop {
+  display: block;
+}
+
+.filters-mobile-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 80vw;
+  max-width: 300px;
+  height: 100vh;
+  background: white;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.3);
+  padding: 1rem;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.close-filters-mobile {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+/* Media queries */
+@media (max-width: $mobile) {
+  .filters-button-mobile {
+    display: flex;
+  }
+
+  .filters-desktop {
+    display: none;
+  }
+  
+  .itineraries-grid {
+    grid-column: span 4;
+  }
+}
+.modal-pill{
+  text-align:center;
+  .icon{
+    width: 100%;
+    text-align: center;
+  }
+}

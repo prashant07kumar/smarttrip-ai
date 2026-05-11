@@ -1,0 +1,93 @@
+@use "@/styles/variables.scss"  as *;
+
+.travel-assistent{
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    width:100%;
+    max-width:600px;
+    font-weight: 600;
+    .title{
+        margin:15px auto ;
+        font-size:x-large;
+        text-align: center;
+        font-weight: 600;
+    }
+    .subtitle{
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        text-align: center;
+    }
+    .step-indicators {
+        display: flex;
+        justify-content: space-between;
+        max-width:100%;
+        align-items: center;
+        margin-bottom:30px;
+        gap:20px;
+        @media (max-width: $mobile) {
+            display:none
+            }
+        
+        }
+        .step-indicator {
+        flex: 1;
+        text-align: center;
+        .step-circle {
+            margin-left: auto;
+            margin-right: auto;
+            width: 2rem;            
+            height: 2rem;            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;    
+            font-weight: bold;        
+            font-size: 0.875rem;     
+            margin-bottom: 0.25rem;    
+        }
+
+        .step-current {
+            background-color: $primary-color; 
+            color: $white;
+        }
+
+        .step-completed {
+            background-color: $primary-color-light; 
+            color: $white;
+        }
+
+        .step-upcoming {
+            background-color: $background-grey; 
+            color: $text-light;             
+        }
+        .step-label {
+            font-size: 0.75rem;      
+            font-weight: 500;     
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            @media (min-width: 640px) {
+            font-size: 0.8
+            }
+        }
+    }
+    
+    .step-content{
+        min-height: 40vh;
+        display: grid;
+        align-content: flex-start;
+        justify-items: center;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.7rem; 
+        width: fit-content;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+.itinerary-view{
+    width:100%!important;
+    max-width:100%!important
+}
