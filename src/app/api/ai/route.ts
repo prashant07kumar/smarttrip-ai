@@ -24,7 +24,6 @@ export async function POST(req: Request) {
   } catch (error: unknown) {
     console.error('FULL API ERROR:', error);
 
-
     const errorMessage =
       error instanceof Error
         ? error.message
