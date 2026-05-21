@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { ItineraryItem } from '@/types/itineraryItem';
 import { getAIPrompt } from '@/utils/getAiPrompt';
+import { cleanAIJsonMessage, tryParseSafeJson } from '@/utils/safeJson';
 
 export default function useTravelForm(destination: string) {
   const [form, setForm] = useState({
@@ -48,36 +49,44 @@ export default function useTravelForm(destination: string) {
     setLoading(true);
     const { travelerType, budget, days, season, interests } = form;
     const interestsString = interests.join(', ');
-    const prompt = `You are TripTailor, a helpful travel assistant. Generate a ${days}-day travel itinerary in ${destination} for a ${travelerType} traveler with a ${budget} budget who enjoys ${interestsString}, during the ${season}. The output must:
-    - Be in English.
-    - Skip any introduction or farewell.
-    - Use HTML-friendly formatting (e.g., <strong> instead of **).
-    - Keep each day's plan short and clear.
-    - Include real place names (museums, landmarks, restaurants, parks, etc.).
-    - Limit to a maximum of 4 activities per day.
-    - Format the output as a JSON array, like:
+    const prompt = `You are TripTailor, a helpful travel assistant. Generate a ${days}-day travel itinerary in ${destination} for a ${travelerType} traveler with a ${budget} budget who enjoys ${interestsString}, during the ${season}. Respond with valid JSON only. Do not add markdown, backticks, explanation, or any extra text. Output must be a JSON array and must parse with JSON.parse(). Example:
     [
       {
         "day": 1,
         "title": "Visit the Eiffel Tower",
-        "place": " "Eiffel Tower, Paris, France",
+        "place": "Eiffel Tower, Paris, France",
         "description": "Start your day at the Eiffel Tower. Buy tickets online to skip the queue."
-      },
-      ...
+      }
     ]
-    - Always include the city and country in the "place" field.
-    - Output only the JSON array.`; 
+    If you cannot produce a valid JSON array, output [] only.`;
 
     const result = await getAIPrompt(prompt);
     try {
-      if (result !== null) {
-        const parsed = JSON.parse(result);
-        setItinerary(parsed);
-      } else {
+      if (result === null) {
         throw new Error('AI response is null');
       }
+
+      const cleanedResult = cleanAIJsonMessage(result);
+      let parsed = tryParseSafeJson<ItineraryItem[]>(cleanedResult);
+      if ((!parsed || !Array.isArray(parsed)) && typeof cleanedResult === 'string') {
+        const arrayMatch = cleanedResult.match(/\[[\s\S]*\]/m)?.[0];
+        if (arrayMatch) {
+          parsed = tryParseSafeJson<ItineraryItem[]>(arrayMatch);
+        }
+      }
+
+      if (!parsed || !Array.isArray(parsed)) {
+        console.warn('AI response could not be parsed as itinerary JSON, returning empty itinerary', {
+          raw: result,
+          cleanedResult,
+        });
+        setItinerary([]);
+        return;
+      }
+
+      setItinerary(parsed);
     } catch (e) {
-      console.error('Invalid AI response', e);
+      console.error('Invalid AI response', e, { result });
       setItinerary(null);
     } finally {
       setLoading(false);

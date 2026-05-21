@@ -9,7 +9,7 @@ export const getTimeZone = async (lat: number, lng: number) => {
 
   try {
     const res = await fetch(url, {
-      next: { revalidate: 86400 }, // Revalidar cada 24h
+      next: { revalidate: 86400 }, 
     });
 
     const text = await res.text();
@@ -36,6 +36,6 @@ export const getTimeZone = async (lat: number, lng: number) => {
 
   } catch (error) {
     console.error('❌ Error fetching timezone data:', error);
-    throw error; // re-throw para que lo capture el SWR o caller
+    throw error;
   }
 };

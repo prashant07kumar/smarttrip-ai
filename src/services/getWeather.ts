@@ -28,7 +28,7 @@ export async function getWeather(lat: number, lon: number) {
       throw new SyntaxError("Failed to parse JSON from OpenWeather");
     }
 
-    // Validación básica del contenido esperado
+  
     if (!data.weather || !Array.isArray(data.weather)) {
       throw new Error("Invalid structure in OpenWeather data");
     }
