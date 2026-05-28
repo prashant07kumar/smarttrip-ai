@@ -19,7 +19,7 @@ function Clima({ weatherData }: ClimaProps) {
         <Thermometer className="icon" />
         <h2 className="card-title">Weather</h2>
       </div>
-      <div className="card-content">
+      <div className="card-content weather-card"> 
         <div className="weather-main">
           <div className="temperature weather-icon-bg" style={{
               backgroundImage: `url(https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png)`,

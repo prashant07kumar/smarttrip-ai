@@ -39,6 +39,7 @@ const DestinationClient = ({ place }: Props) =>{
     weatherData,
     cuisineData,
     cultureData,
+    cityInfo, // ✅ NEW
   } = data;
   if (!countryData || !countryData.languages) {
       return notFound();
@@ -69,6 +70,8 @@ const DestinationClient = ({ place }: Props) =>{
                     <Info
                       countryData={countryData}
                       countryCommonName={countryCommonName}
+                      cityName={cityName}        // ✅ ADD
+                      cityInfo={cityInfo}        // ✅ ADD
                     />
                   </Suspense>
                   <Suspense fallback={<Spinner />}>

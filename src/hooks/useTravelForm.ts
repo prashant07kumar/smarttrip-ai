@@ -49,16 +49,44 @@ export default function useTravelForm(destination: string) {
     setLoading(true);
     const { travelerType, budget, days, season, interests } = form;
     const interestsString = interests.join(', ');
-    const prompt = `You are TripTailor, a helpful travel assistant. Generate a ${days}-day travel itinerary in ${destination} for a ${travelerType} traveler with a ${budget} budget who enjoys ${interestsString}, during the ${season}. Respond with valid JSON only. Do not add markdown, backticks, explanation, or any extra text. Output must be a JSON array and must parse with JSON.parse(). Example:
-    [
-      {
-        "day": 1,
-        "title": "Visit the Eiffel Tower",
-        "place": "Eiffel Tower, Paris, France",
-        "description": "Start your day at the Eiffel Tower. Buy tickets online to skip the queue."
-      }
-    ]
-    If you cannot produce a valid JSON array, output [] only.`;
+   const prompt = `
+You are a travel planning AI.
+
+Generate a strictly valid JSON itinerary.
+
+Rules:
+- Output ONLY a JSON array
+- No markdown, no explanation, no extra text
+- Each item must follow this exact structure:
+  {
+    "day": number,
+    "title": string,
+    "place": string,
+    "description": string
+  }
+
+Generate a ${days}-day itinerary for:
+Destination: ${destination}
+Traveler type: ${travelerType}
+Budget: ${budget}
+Season: ${season}
+Interests: ${interestsString}
+
+Important:
+- Return exactly ${days} items (one per day)
+- Ensure valid JSON (must work with JSON.parse)
+- If unsure, return []
+
+Example:
+[
+  {
+    "day": 1,
+    "title": "Explore Local Market",
+    "place": "Local Market",
+    "description": "Walk around and explore local culture."
+  }
+]
+`;
 
     const result = await getAIPrompt(prompt);
     try {
@@ -84,7 +112,32 @@ export default function useTravelForm(destination: string) {
         return;
       }
 
-      setItinerary(parsed);
+      const targetDays = Math.max(0, days);
+      const normalizedItinerary = parsed
+        .slice(0, targetDays)
+        .map((item, index) => ({
+          day: index + 1,
+          title: item.title,
+          place: item.place || destination,
+          description: item.description,
+        } as ItineraryItem));
+
+      if (normalizedItinerary.length < targetDays) {
+        const missingDays = Array.from(
+    { length: targetDays - normalizedItinerary.length },
+    (_, index) => ({
+      day: normalizedItinerary.length + index + 1,
+      title: 'Free Exploration Day',
+      place: destination,
+      description:
+        'Relax and explore nearby attractions, cafes, or local markets at your own pace.',
+    })
+  ) as ItineraryItem[];
+        setItinerary([...normalizedItinerary, ...missingDays]);
+        return;
+      }
+
+      setItinerary(normalizedItinerary);
     } catch (e) {
       console.error('Invalid AI response', e, { result });
       setItinerary(null);

@@ -114,6 +114,8 @@
     grid-template-columns: 1fr;
     gap: 1.5rem;
     margin-bottom: 2rem;
+    align-items: stretch;   // ✅ ADD THIS
+
     @media (min-width: $tablet) {
    
       grid-template-columns: repeat(3, 1fr);
@@ -147,6 +149,7 @@
     overflow: hidden;
     border-radius: $radius;
     padding:0;
+    height: 100%;   // ✅ ADD THIS
      &:hover {
       transform: none;
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -171,6 +174,12 @@
 
   .card-content {
     padding: 1.5rem;
+    .weather-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; // ✅ spreads content vertically
+        height: 100%;
+      }
   }
 
   /* Basic info grid */
@@ -297,7 +306,8 @@
 
   /* Map styles */
   .map-container {
-    height: 20rem;
+    // height: 20rem;
+    height: 100%;
     background-color: $background-light;
     border-radius: 0 0 12px 12px;
     overflow: hidden;

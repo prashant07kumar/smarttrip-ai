@@ -42,9 +42,9 @@ export default function Footer() {
                     <h4>Credits</h4>
                     <ul>
                         <li className='flex gap-4 text-2xl justify-center sm:justify-start'>
-                            <Link href="https://www.linkedin.com/in/cristianasollini" target='_blank'><FaLinkedin /></Link>
-                            <Link href="https://github.com/papercri" target='_blank'><FaGithub /></Link>
-                            <Link href="mailto:papercri@gmail.com"><MdOutlineEmail /></Link>
+                            <Link href="https://www.linkedin.com/in/prashant-kumar-07p/" target='_blank'><FaLinkedin /></Link>
+                            <Link href="https://github.com/prashant07kumar" target='_blank'><FaGithub /></Link>
+                            <Link href="mailto:prashant033a@gmail.com"><MdOutlineEmail /></Link>
                         </li>
                     </ul>
                     <Link href="/">
