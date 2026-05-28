@@ -112,6 +112,9 @@ type InfoProps = {
     car: {
       side: string;
     };
+    flags?: {
+      png?: string;
+    };
   };
   countryCommonName: string;
 

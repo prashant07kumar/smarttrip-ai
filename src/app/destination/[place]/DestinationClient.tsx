@@ -11,6 +11,7 @@ import Clima from '@/components/destination/clima/Clima';
 import CompoMap from '@/components/destination/map/CompoMap';
 import Cuisine from '@/components/destination/cuisine/Cuisine';
 import Culture from '@/components/destination/culture/Culture';
+import TravelTipsModal from '@/components/destination/travelTips/TravelTipsModal';
 import TravelAssistantModal from '@/components/travelAssistent/TravelAssistantModal';
 import { useDestinationInfo } from '@/hooks/useDestinationInfo';
 import Spinner from '@/components/ui/Spinner/Spinner';
@@ -62,46 +63,56 @@ const DestinationClient = ({ place }: Props) =>{
         />
 
         <section className="dashboard-container">
-          <div className="container ">      
-            <div className="content-main">
-              <div className="info-section">
-                <div className="info-grid">
-                  <Suspense fallback={<Spinner />}>
-                    <Info
-                      countryData={countryData}
-                      countryCommonName={countryCommonName}
-                      cityName={cityName}        // ✅ ADD
-                      cityInfo={cityInfo}        // ✅ ADD
-                    />
-                  </Suspense>
-                  <Suspense fallback={<Spinner />}>
-                    <Clima weatherData={weatherData} />
-                  </Suspense>
-                  <Suspense fallback={<Spinner />}>
-                    <CompoMap
-                      lat={coords.lat}
-                      lng={coords.lng}
-                      place={coords.displayName}
-                    />
-                  </Suspense>
-                </div>
+          <div className="container">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="h-full">
+                <Suspense fallback={<Spinner />}>
+                  <Info
+                    countryData={countryData}
+                    countryCommonName={countryCommonName}
+                    cityName={cityName}
+                    cityInfo={cityInfo}
+                  />
+                </Suspense>
               </div>
-    
-              <div className="info-section">
-                <div className="info-grid info-grid__2col">
-                  <Suspense fallback={<Spinner />}>
-                    <Cuisine cuisineData={cuisineData} />
-                  </Suspense>
-                  <Suspense fallback={<Spinner />}>
-                    <Culture 
-                    cultureData={cultureData}
-                    countryCommonName={countryCommonName} />
-                  </Suspense>
-                </div>
+
+              <div className="h-full">
+                <Suspense fallback={<Spinner />}>
+                  <Clima weatherData={weatherData} />
+                </Suspense>
+              </div>
+
+              <div className="h-full">
+                <Suspense fallback={<Spinner />}>
+                  <CompoMap
+                    lat={coords.lat}
+                    lng={coords.lng}
+                    place={coords.displayName}
+                  />
+                </Suspense>
               </div>
             </div>
+
+            <div className="mt-6">
+              <Suspense fallback={<Spinner />}>
+                <TravelTipsModal place={cityName} />
+              </Suspense>
+            </div>
+
+            <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2">
+              <Suspense fallback={<Spinner />}>
+                <Cuisine cuisineData={cuisineData} />
+              </Suspense>
+              <Suspense fallback={<Spinner />}>
+                <Culture
+                  cultureData={cultureData}
+                  countryCommonName={countryCommonName}
+                />
+              </Suspense>
+            </div>
+
             <div className="chatbot-container">
-              <TravelAssistantModal destination={cityName}/>
+              <TravelAssistantModal destination={cityName} />
             </div>
           </div>
         </section>
