@@ -1,4 +1,5 @@
 @use "@/styles/variables.scss"  as *;
+@use 'sass:color';
 *,
 *::before,
 *::after  {
@@ -72,7 +73,7 @@ input[type="number"].no-spinner::-webkit-inner-spin-button {
     color: $white;
     
     &:hover {
-      background-color: darken($primary-color, 10%);
+      background-color: color.adjust($primary-color, 10%);
       transform: translateY(-1px);
     }
   }
@@ -82,7 +83,7 @@ input[type="number"].no-spinner::-webkit-inner-spin-button {
     color: $white;
     
     &:hover {
-      background-color: darken($secondary-color, 10%);
+      background-color: color.adjust($secondary-color, 10%);
       transform: translateY(-1px);
     }
   }
