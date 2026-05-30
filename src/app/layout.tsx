@@ -1,5 +1,6 @@
 import "./styles.css";
 import "@/styles/globals.scss";
+import "@/styles/destination.scss";
 import { Inter } from 'next/font/google';
 import type { Metadata } from "next";
 import { UserProvider } from '@/context/UserContext';

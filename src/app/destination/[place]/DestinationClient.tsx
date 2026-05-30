@@ -1,6 +1,5 @@
 'use client';
-
-import '@/styles/destination.scss';
+// destination.scss is imported globally in app/layout.tsx
 import React, { Suspense } from 'react';
 import Header from '@/components/layout/header/Header';
 import Footer from '@/components/layout/footer/Footer';
