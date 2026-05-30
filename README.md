@@ -1,6 +1,6 @@
 # TripTailor 🌍
 
-[Live Demo](https://triptailor-ai.vercel.app/) • [Source Code](https://github.com/papercri/triptailor.git)
+[Live Demo]   https://smarttrip-30rh5h4ws-prashant033a-gmailcoms-projects.vercel.app/
 
 ---
 
@@ -109,15 +109,6 @@ The Saved Itineraries page includes a dynamic client-side **filter and sort pane
 - **Frontend**: Next.js 15, React 19
 - **Styling**: Tailwind CSS, Sass
 - **Animations**: Framer Motion, Lucide & React-icons
-- **Data Fetching**: SWR
-- **APIs**:
-  - Geocoding: [Nominatim OpenStreetMap](https://nominatim.openstreetmap.org/)
-  - Country Info: [REST Countries](https://restcountries.com/)
-  - Weather: [OpenWeatherMap](https://openweathermap.org/api)
-  - Timezone: [TimeZoneDB](https://timezonedb.com/)
-  - Wikimedia REST API [Wikimedia REST API](https://en.wikipedia.org/api/rest_v1/)
-  - Unsplash: photo search [Unsplash](hhttps://unsplash.com/)
-  - Personalized trip suggestions: [OpenAI API](https://platform.openai.com/) — GPT-based prompts tailored to user input (budget, travel style, season, interests)
 - **Auth**: Firebase Authentication
 - **Database**: Firebase Firestore
 - **Maps**: Leaflet
@@ -133,22 +124,7 @@ cd triptailor
 
 npm install
 
-set up environment variables:
-GEMINI_API_KEY
-NEXT_PUBLIC_UNSPLASH_ACCESS_KEY
-NEXT_PUBLIC_TIMEZONEDB_API_KEY
-NEXT_PUBLIC_OPENWEATHER_API_KEY
-NEXT_PUBLIC_FIREBASE_API_KEY
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
-NEXT_PUBLIC_FIREBASE_DATABASE_URL
-NEXT_PUBLIC_FIREBASE_PROJECT_ID
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
-
-npm run dev
-```
-
-Build for production:
+-- required API
 
 ```bash
 npm run build
